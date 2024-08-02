@@ -80,16 +80,27 @@ ul {
 }
 
 
-@media (max-width: 770px) {
+@media (max-width: 960px) {
   .hamburger {
     display: block;
   }
 
   .sidebar {
     width: 100%;
+    max-width: 350px;
   }
 
   .close-btn {
     display: block;
+  }
+}
+@media (min-width: 961px) {
+  .hamburger, .close-btn {
+    display: none;
+  }
+  .sidebar {
+    transform: translateX(0);
+    width: 550px;
+    box-shadow: none;
   }
 }
