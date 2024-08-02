@@ -1,7 +1,7 @@
 
 
 .sidebar {
-  background-color: white;
+  background-color: rgb(237, 236, 250);
   color: black;
   border-right: 1px solid #ddd;
   width: 950px;
@@ -14,6 +14,7 @@
   overflow-y: auto;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  border-radius: 20px;
 }
 
 .sidebar.open {
@@ -23,7 +24,7 @@
 .hamburger {
   font-size: 2rem;
   cursor: pointer;
-  color: rgb(98, 97, 97);
+  color: rgb(5, 4, 4);
   margin: 15px;
   position: absolute;
   top: 15px;
@@ -35,7 +36,7 @@
   font-size: 2rem;
   cursor: pointer;
   margin: 15px;
-  color: rgb(98, 97, 97);
+  color: rgb(58, 56, 56);
   position: absolute;
   top: 15px;
   right: 15px;
@@ -63,20 +64,20 @@ ul {
   padding: 40px 40px;
   cursor: pointer;
   transition: background 0.3s ease;
-  color: rgb(185, 179, 179);
+  color: rgb(58, 56, 56);
   margin-top: 30px;
 }
 .items{
   margin-top : 80px;
 }
 .nav-item:hover {
-  background-color: #f1f1f1;
+  background-color: rgb(222, 220, 243);
 }
 
 .nav-item .icon {
   margin-right: 15px;
   font-size: 1.5rem;
-  color: rgb(135, 132, 132);
+  color: rgb(58, 56, 56);
 }
 
 
@@ -100,7 +101,13 @@ ul {
   }
   .sidebar {
     transform: translateX(0);
-    width: 550px;
+    width: 450px;
     box-shadow: none;
+    margin-top:150px;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    padding: 20px 40px;
   }
 }
