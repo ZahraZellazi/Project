@@ -1,10 +1,11 @@
 import React from 'react';
-import Sidebar from './Sidebar'; // Ensure the correct path and filename case
+import Sidebar from './components/Sidebar';
 
 function App() {
   return (
     <div className="App">
       <Sidebar />
+      
     </div>
   );
 }
