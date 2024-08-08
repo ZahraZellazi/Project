@@ -1,0 +1,13 @@
+.App {
+  display: flex;
+  height: 100vh;
+}
+
+.Sidebar {
+  width: 270px; 
+}
+
+.Dashboard {
+  flex-grow: 1;
+  padding: 20px;
+}
