@@ -10,12 +10,12 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Create an 'uploads' directory if it doesn't exist
+// uploads' directory 
 if (!fs.existsSync('uploads')) {
   fs.mkdirSync('uploads');
 }
 
-// MongoDB connection
+// MongoDB 
 mongoose.connect("mongodb+srv://zahra:zahra030702@cluster0.e6d8kvo.mongodb.net/project3A?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -23,7 +23,7 @@ mongoose.connect("mongodb+srv://zahra:zahra030702@cluster0.e6d8kvo.mongodb.net/p
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('Failed to connect to MongoDB', err));
 
-// Schema and Model
+// Schema 
 const itemSchema = new mongoose.Schema({
   image: String,
   url: String,
@@ -32,7 +32,7 @@ const itemSchema = new mongoose.Schema({
 
 const Item = mongoose.model('Item', itemSchema);
 
-// Set up Multer for file uploads
+// file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/');
