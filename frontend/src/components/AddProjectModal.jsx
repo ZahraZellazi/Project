@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import './AddProjectModal.css';
 
-function AddProjectModal({ item, mode, onClose, onSave }) {
-  const [image, setImage] = useState('');
+function AddProjectModal({ isOpen, onClose, onAdd }) {
+  const [image, setImage] = useState(null);
   const [url, setUrl] = useState('');
   const [path, setPath] = useState('');
   const [errors, setErrors] = useState({ image: '', url: '', path: '' });
 
   useEffect(() => {
-    if (item) {
-      setImage(item.image || '');
-      setUrl(item.url || '');
-      setPath(item.path || '');
+    // Reset the form if the modal is closed
+    if (!isOpen) {
+      setImage(null);
+      setUrl('');
+      setPath('');
+      setErrors({ image: '', url: '', path: '' });
     }
-  }, [item]);
+  }, [isOpen]);
 
   const validate = () => {
     let isValid = true;
     const newErrors = { image: '', url: '', path: '' };
 
-    if (!image.trim()) {
+    if (!image) {
       newErrors.image = 'Image is required.';
       isValid = false;
     }
@@ -40,43 +42,50 @@ function AddProjectModal({ item, mode, onClose, onSave }) {
 
   const handleInputChange = (e, field) => {
     const { value } = e.target;
-    if (field === 'image') {
-      setImage(value);
-    } else if (field === 'url') {
+    if (field === 'url') {
       setUrl(value);
     } else if (field === 'path') {
       setPath(value);
     }
-
     setErrors((prevErrors) => ({
       ...prevErrors,
       [field]: ''
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleFileChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-      const updatedItem = { ...item, image, url, path };
-      onSave(updatedItem);
+      const formData = new FormData();
+      formData.append('image', image);
+      formData.append('url', url);
+      formData.append('path', path);
+
+      try {
+        await onAdd(formData);
+        onClose(); // Close the modal after successful addition
+      } catch (error) {
+        console.error('Error adding item:', error);
+      }
     }
   };
+
+  if (!isOpen) return null;
 
   return (
     <div className="modal-overlay">
       <div className="modal-content">
         <div className="modal-header">
-          <h2>{mode === 'add' ? 'Add New Item' : 'Update Item'}</h2>
+          <h2>Add New Project</h2>
         </div>
         <form onSubmit={handleSubmit}>
           <label>
             Image:
-            <input
-              type="text"
-              value={image}
-              onChange={(e) => handleInputChange(e, 'image')}
-              style={{ borderColor: errors.image ? 'red' : 'initial' }}
-            />
+            <input type="file" onChange={handleFileChange} />
             {errors.image && <div className="error-message">{errors.image}</div>}
           </label>
           <label>
@@ -99,7 +108,7 @@ function AddProjectModal({ item, mode, onClose, onSave }) {
             />
             {errors.path && <div className="error-message">{errors.path}</div>}
           </label>
-          <button type="submit">{mode === 'add' ? 'Add Item' : 'Update Item'}</button>
+          <button type="submit">Add Project</button>
           <button type="button" onClick={onClose}>Cancel</button>
         </form>
       </div>
