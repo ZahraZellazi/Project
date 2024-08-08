@@ -1,40 +1,28 @@
+// src/components/Dashboard.js
 import React, { useState } from 'react';
-import './Dashboard.css';
-import AddProjectModal from './AddProjectModal';
-
+import Card from './Card';
+import AddModal from './AddProjectModal';
+import './Dashboard.css'; // Add styles for the dashboard
+import { FaPlus } from 'react-icons/fa';
 const Dashboard = () => {
-  const [projects, setProjects] = useState([]);
+  const [cards, setCards] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newProjectName, setNewProjectName] = useState('');
 
-  const handleAddProject = () => {
-    setProjects([...projects, { name: newProjectName }]);
-    setNewProjectName('');
-    setIsModalOpen(false);
+  const handleAdd = (newCard) => {
+    setCards([...cards, newCard]);
   };
 
   return (
     <div className="dashboard">
-      <h1>My Projects</h1>
-      <div className="cards">
-        {projects.map((project, index) => (
-          <div className="card" key={index}>
-            <h2>{project.name}</h2>
-            <p>Code source for {project.name}</p>
-          </div>
+      <div className="card-grid">
+        {cards.map((card, index) => (
+          <Card key={index} image={card.image} name={card.name} />
         ))}
-        <button className="add-button" onClick={() => setIsModalOpen(true)}>
-          + Add Project
-        </button>
       </div>
-
-      <AddProjectModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onAddProject={handleAddProject}
-        newProjectName={newProjectName}
-        setNewProjectName={setNewProjectName}
-      />
+      <button className="add-project-button" onClick={() => setIsModalOpen(true)}>
+      <FaPlus size={20} />
+      </button>
+      <AddModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onAdd={handleAdd} />
     </div>
   );
 };
