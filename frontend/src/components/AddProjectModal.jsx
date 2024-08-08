@@ -8,7 +8,6 @@ function AddProjectModal({ isOpen, onClose, onAdd }) {
   const [errors, setErrors] = useState({ image: '', url: '', path: '' });
 
   useEffect(() => {
-    // Reset the form if the modal is closed
     if (!isOpen) {
       setImage(null);
       setUrl('');
@@ -67,7 +66,7 @@ function AddProjectModal({ isOpen, onClose, onAdd }) {
 
       try {
         await onAdd(formData);
-        onClose(); // Close the modal after successful addition
+        onClose(); 
       } catch (error) {
         console.error('Error adding item:', error);
       }

@@ -3,7 +3,7 @@ import Card from './Card';
 import AddProjectModal from './AddProjectModal';
 import './Dashboard.css'; 
 import { FaPlus } from 'react-icons/fa';
-import axios from 'axios'; // Import axios for making HTTP requests
+import axios from 'axios'; 
 
 const Dashboard = () => {
   const [cards, setCards] = useState([]);
@@ -11,9 +11,8 @@ const Dashboard = () => {
 
   const handleAdd = async (newCard) => {
     try {
-      // Make a POST request to the backend
       const response = await axios.post('http://localhost:7777/items', newCard);
-      setCards([...cards, response.data]); // Update the state with the response data
+      setCards([...cards, response.data]); 
     } catch (error) {
       console.error('Error adding item:', error);
     }
