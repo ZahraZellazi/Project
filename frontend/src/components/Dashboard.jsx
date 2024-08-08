@@ -1,15 +1,17 @@
 // src/components/Dashboard.js
 import React, { useState } from 'react';
 import Card from './Card';
-import AddModal from './AddProjectModal';
-import './Dashboard.css'; // Add styles for the dashboard
+import AddProjectModal from './AddProjectModal'; // Make sure this matches the correct import path
+import './Dashboard.css'; 
 import { FaPlus } from 'react-icons/fa';
+
 const Dashboard = () => {
   const [cards, setCards] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAdd = (newCard) => {
     setCards([...cards, newCard]);
+    setIsModalOpen(false); // Close modal after adding
   };
 
   return (
@@ -20,9 +22,15 @@ const Dashboard = () => {
         ))}
       </div>
       <button className="add-project-button" onClick={() => setIsModalOpen(true)}>
-      <FaPlus size={20} />
+        <FaPlus size={20} />
       </button>
-      <AddModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onAdd={handleAdd} />
+      {isModalOpen && (
+        <AddProjectModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSave={handleAdd}
+        />
+      )}
     </div>
   );
 };

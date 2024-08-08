@@ -1,49 +1,117 @@
-/* src/components/AddModal.css */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    right: 0;
+    bottom: 0;
+    background:none ;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000; 
   }
   
-  .modal {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 400px;
-    text-align: center;
+  .modal-content {
+    background: white; 
+    padding: 30px; 
+    border-radius: 10px; 
+    width: 600px;
+    max-width: 95%; 
+    color: rgb(189, 4, 4);
+    box-shadow: 0 5px 15px rgba(189, 4, 4, 0.3); 
+    position: relative; 
   }
   
-  .modal input {
+  .modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 20px; 
+    font-size: 1.5rem; 
+    color: rgb(214, 5, 5); 
+  }
+  
+  .modal-content label {
     display: block;
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    margin-bottom: 5px; 
+    color: rgb(214, 5, 5);
+    font-weight: 600; 
+    font-size: 1rem; 
   }
   
-  .modal button {
-    margin: 10px;
-    padding: 10px;
+  .modal-content input,
+  .modal-content textarea {
+    width: 98%; 
+    padding: 10px; 
+    margin-bottom: 20px; 
+    border: 2px solid rgb(189, 4, 4); 
+    border-radius: 4px;
+    background: transparent; 
+    color: rgb(137, 1, 1); 
+    font-size: 1rem; 
+    outline: none; 
+    transition: border-color 0.3s ease; 
+  }
+  
+  .modal-content input.error,
+  .modal-content textarea.error {
+    border-color: red;
+  }
+  
+  .modal-content input:focus,
+  .modal-content textarea:focus {
+    border-color: rgb(55, 72, 110);
+  }
+  
+  .modal-content button {
+    padding: 10px 20px; 
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    background: rgb(214, 5, 5); 
+    color: white; 
+    font-weight: 700; 
+    font-size: 1rem; 
+    transition: background-color 0.3s ease; 
+    width: 100%; 
+    margin-top: 20px; 
   }
   
-  .modal button:first-of-type {
-    background-color: #4CAF50;
-    color: white;
+  .modal-content button:hover {
+    background-color: rgb(239, 239, 244); 
+    color: rgb(214, 5, 5);
   }
   
-  .modal button:last-of-type {
-    background-color: #f44336;
-    color: white;
+  @media (max-width: 768px) {
+    .modal-content {
+      width: 90%; 
+      padding: 20px; 
+      height: auto; 
+    }
+    .modal-content button {
+      width: 100%; 
+      margin-top: 20px; 
+      margin-left: 0; 
+    }
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #aaa;
+    transition: color 0.3s ease;
+  }
+  
+  .modal-close:hover {
+    color: rgb(55, 72, 110);
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 5px;
   }
   

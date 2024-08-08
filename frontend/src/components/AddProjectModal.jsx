@@ -1,41 +1,110 @@
-// src/components/AddModal.js
-import React, { useState } from 'react';
-import './AddProjectModal.css'; // Add styles for the modal
+import React, { useState, useEffect } from 'react';
+import './AddProjectModal.css';
 
-const AddProjectModal = ({ isOpen, onClose, onAdd }) => {
-  const [name, setName] = useState('');
+function AddProjectModal({ item, mode, onClose, onSave }) {
   const [image, setImage] = useState('');
+  const [url, setUrl] = useState('');
+  const [path, setPath] = useState('');
+  const [errors, setErrors] = useState({ image: '', url: '', path: '' });
 
-  const handleAdd = () => {
-    onAdd({ name, image });
-    setName('');
-    setImage('');
-    onClose();
+  useEffect(() => {
+    if (item) {
+      setImage(item.image || '');
+      setUrl(item.url || '');
+      setPath(item.path || '');
+    }
+  }, [item]);
+
+  const validate = () => {
+    let isValid = true;
+    const newErrors = { image: '', url: '', path: '' };
+
+    if (!image.trim()) {
+      newErrors.image = 'Image is required.';
+      isValid = false;
+    }
+
+    if (!url.trim()) {
+      newErrors.url = 'URL is required.';
+      isValid = false;
+    }
+
+    if (!path.trim()) {
+      newErrors.path = 'Path is required.';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  const handleInputChange = (e, field) => {
+    const { value } = e.target;
+    if (field === 'image') {
+      setImage(value);
+    } else if (field === 'url') {
+      setUrl(value);
+    } else if (field === 'path') {
+      setPath(value);
+    }
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [field]: ''
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      const updatedItem = { ...item, image, url, path };
+      onSave(updatedItem);
+    }
   };
 
   return (
-    isOpen ? (
-      <div className="modal-overlay">
-        <div className="modal">
-          <h2>Add New Project</h2>
-          <input
-            type="text"
-            placeholder="Project Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Image URL"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-          />
-          <button onClick={handleAdd}>Add Project</button>
-          <button onClick={onClose}>Close</button>
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h2>{mode === 'add' ? 'Add New Item' : 'Update Item'}</h2>
         </div>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Image:
+            <input
+              type="text"
+              value={image}
+              onChange={(e) => handleInputChange(e, 'image')}
+              style={{ borderColor: errors.image ? 'red' : 'initial' }}
+            />
+            {errors.image && <div className="error-message">{errors.image}</div>}
+          </label>
+          <label>
+            URL:
+            <input
+              type="text"
+              value={url}
+              onChange={(e) => handleInputChange(e, 'url')}
+              style={{ borderColor: errors.url ? 'red' : 'initial' }}
+            />
+            {errors.url && <div className="error-message">{errors.url}</div>}
+          </label>
+          <label>
+            Path:
+            <input
+              type="text"
+              value={path}
+              onChange={(e) => handleInputChange(e, 'path')}
+              style={{ borderColor: errors.path ? 'red' : 'initial' }}
+            />
+            {errors.path && <div className="error-message">{errors.path}</div>}
+          </label>
+          <button type="submit">{mode === 'add' ? 'Add Item' : 'Update Item'}</button>
+          <button type="button" onClick={onClose}>Cancel</button>
+        </form>
       </div>
-    ) : null
+    </div>
   );
-};
+}
 
 export default AddProjectModal;
