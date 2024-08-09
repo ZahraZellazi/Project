@@ -1,35 +1,96 @@
 .Header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background: rgb(214, 5, 5); 
-    color: #fff;
-    position: fixed;
-    width: calc(100% - 270px); 
-    top: 0;
-    width:100%;
-    left: 0px; 
-    z-index: 1000; 
-    height:120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: rgb(214, 5, 5);
+  color: #fff;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  height: 120px;
 }
-  
-  .search-bar input {
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  .auth-buttons button {
-    margin-left: 10px;
-    background: #f4f4f4;
-    border: none;
-    border-radius: 10px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .auth-buttons button:hover {
-    background: #ddd;
-  }
-  
+
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* Push search bar to the far right */
+}
+
+.search-bar input {
+  padding: 10px;
+  border: none;
+  border-radius: 50px;
+  width: 50px; 
+  font-size: 16px;
+  color: #333;
+  background: #fff;
+  outline: none;
+  transition: width 0.3s ease, background 0.3s ease, margin-left 0.3s ease;
+  opacity: 0; 
+  visibility: hidden;
+  position: absolute;
+  right: 0; /* Ensure it appears from the right side */
+  top: 50%;
+  transform: translateY(-50%); /* Center vertically */
+}
+
+.search-bar:hover input {
+  width: 300px; 
+  opacity: 1; 
+  visibility: visible; 
+  background: #ffffff; 
+  margin-left: -250px; /* Adjust so it expands from the right */
+}
+
+.search-bar .search-icon {
+  font-size: 20px; 
+  color: #ffffff;
+  transition: opacity 0.3s ease;
+  border: 3px solid white; 
+  border-radius: 50%;
+  width: 40px; 
+  height: 40px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px; 
+  box-sizing: border-box;
+  position: absolute; /* Ensure it's not part of the flow */
+  right: 0; /* Align with the search input */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.search-bar:hover .search-icon {
+  opacity: 0; 
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: 40px ; 
+}
+
+.auth-buttons button {
+  background: none;
+  border: 2px solid white ;
+  border-radius: 25px; 
+  padding: 10px 20px;
+  cursor: pointer;
+  color: #333;
+  font-size: 16px;
+  transition: background 0.3s ease, color 0.3s ease;
+  color : white;
+}
+
+.auth-buttons button:hover {
+  background: #ffffff;
+  color:rgb(214, 5, 5);
+}
+
+.auth-buttons button:focus {
+  outline: none;
+}
