@@ -16,7 +16,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  margin-left: auto; /* Push search bar to the far right */
+  margin-left: auto; 
 }
 
 .search-bar input {
@@ -32,9 +32,9 @@
   opacity: 0; 
   visibility: hidden;
   position: absolute;
-  right: 0; /* Ensure it appears from the right side */
+  right: 0; 
   top: 50%;
-  transform: translateY(-50%); /* Center vertically */
+  transform: translateY(-50%); 
 }
 
 .search-bar:hover input {
@@ -42,7 +42,7 @@
   opacity: 1; 
   visibility: visible; 
   background: #ffffff; 
-  margin-left: -250px; /* Adjust so it expands from the right */
+  margin-left: -250px; 
 }
 
 .search-bar .search-icon {
@@ -58,8 +58,8 @@
   justify-content: center;
   padding: 8px; 
   box-sizing: border-box;
-  position: absolute; /* Ensure it's not part of the flow */
-  right: 0; /* Align with the search input */
+  position: absolute;
+  right: 0; 
   top: 50%;
   transform: translateY(-50%);
 }

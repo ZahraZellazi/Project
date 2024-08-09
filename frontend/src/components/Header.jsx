@@ -1,6 +1,6 @@
 import React from 'react';
 import './Header.css';
-import { FaSearch } from 'react-icons/fa'; // Import the search icon from react-icons
+import { FaSearch } from 'react-icons/fa';
 
 const Header = () => {
   return (
