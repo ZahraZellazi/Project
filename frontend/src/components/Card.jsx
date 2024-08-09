@@ -9,7 +9,7 @@ const Card = ({ image, name, onClickDelete, onClickEdit, onClickDownload }) => {
       <div className="card-content">
         <div className="card-info">
           <h3 className="card-title">{name}</h3>
-          <p className="card-description">Some description or metadata</p>
+          <p className="card-description">add description </p>
         </div>
         <div className="card-actions">
           <button onClick={onClickEdit} className="card-icon-button">

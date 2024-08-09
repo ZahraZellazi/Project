@@ -8,10 +8,10 @@ const path = require('path');
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/uploads', express.static('uploads')); // Serve static files from the 'uploads' directory
+app.use('/uploads', express.static('uploads')); 
 
 // MongoDB
-mongoose.connect("mongodb+srv://zahra:zahra030702@cluster0.e6d8kvo.mongodb.net/project3A?retryWrites=true&w=majority",{
+mongoose.connect("mongodb+srv://zahra:zahra030702@cluster0.e6d8kvo.mongodb.net/project3A?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -39,26 +39,58 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Define routes
+//crud op
 app.post('/items', upload.single('image'), async (req, res) => {
   const { url, path } = req.body;
-  const image = req.file ? req.file.filename : null; // Retrieve filename
+  const image = req.file ? req.file.filename : null; 
   const newItem = new Item({ image, url, path });
 
   try {
     await newItem.save();
-    res.status(201).json(newItem); // Send JSON response
+    res.status(201).json(newItem); 
   } catch (error) {
-    res.status(400).json({ error: error.message }); // Send error message
+    res.status(400).json({ error: error.message }); 
   }
 });
 
 app.get('/items', async (req, res) => {
   try {
     const items = await Item.find();
-    res.status(200).json(items); // Send JSON response
+    res.status(200).json(items); 
   } catch (error) {
-    res.status(500).json({ error: error.message }); // Send error message
+    res.status(500).json({ error: error.message }); 
+  }
+});
+
+// PATCH route to update an item
+app.patch('/items/:id', upload.single('image'), async (req, res) => {
+  const { id } = req.params;
+  const { url, path } = req.body;
+  const image = req.file ? req.file.filename : undefined;
+
+  try {
+    const updatedItem = await Item.findByIdAndUpdate(id, { url, path, image }, { new: true });
+    if (!updatedItem) {
+      return res.status(404).json({ error: 'Item not found' });
+    }
+    res.status(200).json(updatedItem); 
+  } catch (error) {
+    res.status(400).json({ error: error.message }); 
+  }
+});
+
+
+app.delete('/items/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedItem = await Item.findByIdAndDelete(id);
+    if (!deletedItem) {
+      return res.status(404).json({ error: 'Item not found' });
+    }
+    res.status(200).json({ message: 'Item deleted successfully' }); 
+  } catch (error) {
+    res.status(500).json({ error: error.message }); 
   }
 });
 

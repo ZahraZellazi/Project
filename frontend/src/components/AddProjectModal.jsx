@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './AddProjectModal.css';
-
+import { toast } from 'react-toastify'; 
 function AddProjectModal({ isOpen, onClose, onAdd }) {
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState('');
@@ -16,7 +16,6 @@ function AddProjectModal({ isOpen, onClose, onAdd }) {
     }
   }, [isOpen]);
 
-  // Form validation 
   const validate = () => {
     let isValid = true;
     const newErrors = { image: '', url: '', path: '' };
@@ -40,7 +39,6 @@ function AddProjectModal({ isOpen, onClose, onAdd }) {
     return isValid;
   };
 
- 
   const handleInputChange = (e, field) => {
     const { value } = e.target;
     if (field === 'url') {
@@ -48,14 +46,12 @@ function AddProjectModal({ isOpen, onClose, onAdd }) {
     } else if (field === 'path') {
       setPath(value);
     }
-    // Clear errors when user starts typing
     setErrors((prevErrors) => ({
       ...prevErrors,
       [field]: ''
     }));
   };
 
- 
   const handleFileChange = (e) => {
     setImage(e.target.files[0]);
     setErrors((prevErrors) => ({
@@ -63,7 +59,6 @@ function AddProjectModal({ isOpen, onClose, onAdd }) {
       image: ''
     }));
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,10 +69,32 @@ function AddProjectModal({ isOpen, onClose, onAdd }) {
       formData.append('path', path);
 
       try {
-        await onAdd(formData); 
+        const response = await fetch('http://localhost:7777/items', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const result = await response.json();
+        console.log('Success:', result);
+
+        toast.success('Project added successfully!', {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+
+        if (onAdd && typeof onAdd === 'function') {
+          await onAdd(result); 
+        }
+
         onClose(); 
       } catch (error) {
         console.error('Error adding item:', error);
+        toast.error('Error adding project. Please try again.', {
+          position: toast.POSITION.TOP_RIGHT,
+        });
       }
     }
   };
