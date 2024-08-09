@@ -1,15 +1,27 @@
-
 import React from 'react';
-import './Card.css';
-const Card = ({ image, url, path, onClick }) => {
+import { FaTrash, FaEdit, FaDownload } from 'react-icons/fa';
+import './Card.css'; 
+
+const Card = ({ image, name, onClickDelete, onClickEdit, onClickDownload }) => {
   return (
-    <div className="card" onClick={onClick}>
-      <img src={image} alt={path} className="card-image" />
+    <div className="card">
+      <img src={image} alt={name} className="card-image" />
       <div className="card-content">
-        <h3 className="card-title">{path}</h3>
-        <a href={url} className="card-url" target="_blank" rel="noopener noreferrer">
-          {url}
-        </a>
+        <div className="card-info">
+          <h3 className="card-title">{name}</h3>
+          <p className="card-description">Some description or metadata</p>
+        </div>
+        <div className="card-actions">
+          <button onClick={onClickEdit} className="card-icon-button">
+            <FaEdit />
+          </button>
+          <button onClick={onClickDelete} className="card-icon-button">
+            <FaTrash />
+          </button>
+          <button onClick={onClickDownload} className="card-icon-button">
+            <FaDownload />
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,10 +1,18 @@
 .App {
   display: flex;
+  flex-direction: column; /* Ensure header and footer are stacked vertically */
   height: 100vh;
 }
 
+.main-content {
+  display: flex;
+  margin-top: 50px; /* Height of header to push content below */
+  height: calc(100vh - 50px); /* Adjust height to account for footer */
+}
+
 .Sidebar {
-  width: 270px; 
+  width: 270px;
+  background: #f4f4f4; /* Light background for sidebar */
 }
 
 .Dashboard {

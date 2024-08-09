@@ -1,0 +1,35 @@
+.Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: rgb(214, 5, 5); /* Dark background for header */
+    color: #fff;
+    position: fixed;
+    width: calc(100% - 270px); /* Adjust width to fit sidebar */
+    top: 0;
+    width:100%;
+    left: 0px; /* Position it to the right of the sidebar */
+    z-index: 1000; /* Ensure it sits on top of other elements */
+    height:120px;
+}
+  
+  .search-bar input {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .auth-buttons button {
+    margin-left: 10px;
+    background: #f4f4f4;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .auth-buttons button:hover {
+    background: #ddd;
+  }
+  
