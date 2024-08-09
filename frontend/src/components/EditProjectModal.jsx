@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './AddProjectModal.css'; // Use the same styles or modify as needed
-import { toast } from 'react-toastify'; // Import Toastify
+import './AddProjectModal.css'; 
+import { toast } from 'react-toastify'; 
 
 function EditProjectModal({ isOpen, onClose, onEdit, initialData }) {
   const [image, setImage] = useState(null);
@@ -88,7 +88,7 @@ function EditProjectModal({ isOpen, onClose, onEdit, initialData }) {
           position: toast.POSITION.TOP_RIGHT,
         });
 
-        onEdit(result); // Call onEdit to update the UI with the edited item
+        onEdit(result); 
         onClose(); 
       } catch (error) {
         console.error('Error updating item:', error);

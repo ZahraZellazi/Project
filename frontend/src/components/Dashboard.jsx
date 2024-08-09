@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from './Card';
 import AddProjectModal from './AddProjectModal';
-import EditProjectModal from './EditProjectModal'; // Import the edit modal
+import EditProjectModal from './EditProjectModal'; 
 import './Dashboard.css'; 
 import { FaPlus } from 'react-icons/fa';
 
@@ -87,7 +87,7 @@ const Dashboard = () => {
             name={card.path}
             onClickEdit={() => handleEditClick(card)}
             onClickDelete={() => handleDelete(card._id)}
-            onClickDownload={() => console.log('Download logic here')} // Implement download logic if needed
+            onClickDownload={() => console.log('Download logic here')} 
           />
         ))}
       </div>
