@@ -7,7 +7,6 @@ function AddProjectModal({ isOpen, onClose, onAdd }) {
   const [path, setPath] = useState('');
   const [errors, setErrors] = useState({ image: '', url: '', path: '' });
 
-  // Reset form fields when the modal is closed
   useEffect(() => {
     if (!isOpen) {
       setImage(null);
@@ -17,7 +16,7 @@ function AddProjectModal({ isOpen, onClose, onAdd }) {
     }
   }, [isOpen]);
 
-  // Form validation function
+  // Form validation 
   const validate = () => {
     let isValid = true;
     const newErrors = { image: '', url: '', path: '' };
@@ -41,7 +40,7 @@ function AddProjectModal({ isOpen, onClose, onAdd }) {
     return isValid;
   };
 
-  // Handle input changes for text fields
+ 
   const handleInputChange = (e, field) => {
     const { value } = e.target;
     if (field === 'url') {
@@ -56,7 +55,7 @@ function AddProjectModal({ isOpen, onClose, onAdd }) {
     }));
   };
 
-  // Handle file input change
+ 
   const handleFileChange = (e) => {
     setImage(e.target.files[0]);
     setErrors((prevErrors) => ({
@@ -65,7 +64,7 @@ function AddProjectModal({ isOpen, onClose, onAdd }) {
     }));
   };
 
-  // Handle form submission
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
@@ -75,15 +74,14 @@ function AddProjectModal({ isOpen, onClose, onAdd }) {
       formData.append('path', path);
 
       try {
-        await onAdd(formData); // Call onAdd with formData
-        onClose(); // Close the modal after successful add
+        await onAdd(formData); 
+        onClose(); 
       } catch (error) {
         console.error('Error adding item:', error);
       }
     }
   };
 
-  // If the modal is not open, do not render it
   if (!isOpen) return null;
 
   return (

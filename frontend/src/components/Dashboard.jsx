@@ -25,7 +25,7 @@ const Dashboard = () => {
   const handleAdd = async (newCard) => {
     try {
       const formData = new FormData();
-      formData.append('image', newCard.image); // Ensure newCard.image is a File object
+      formData.append('image', newCard.image); 
       formData.append('url', newCard.url);
       formData.append('path', newCard.path);
 
@@ -50,6 +50,7 @@ const Dashboard = () => {
       </div>
       <button className="add-project-button" onClick={() => setIsModalOpen(true)}>
         <FaPlus size={20} />
+        New project
       </button>
       {isModalOpen && (
         <AddProjectModal

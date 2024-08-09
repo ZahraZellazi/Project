@@ -1,13 +1,13 @@
 .Footer {
-    background: rgb(214, 5, 5); /* Dark background for footer */
+    background: rgb(214, 5, 5); 
     color: #fff;
     text-align: center;
     padding: 10px;
     position: fixed;
-    width: calc(100% - 270px); /* Adjust width to fit sidebar */
+    width: calc(100% - 270px); 
     bottom: 0;
     width:100%;
-    left: 0px; /* Position it to the right of the sidebar */
-    z-index: 1000; /* Ensure it sits on top of other elements */
+    left: 0px; 
+    z-index: 1000; 
   }
   

@@ -3,31 +3,30 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%; /* Ensure the grid takes full width */
+  width: 100%; 
 }
 
 .card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
-  margin: 10px 0; /* Add margin between cards */
+  padding: 20px; 
+  margin: 10px 0; 
   border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1); 
   background-color: #fff;
-  width: 60%; /* Set a specific width for the cards */
-  max-width: 600px; /* Set a max-width to avoid the card becoming too large */
+  width: 80%; 
+  max-width: 800px; 
   transition: transform 0.2s ease-in-out;
 }
 
-
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px); 
 }
 
 .card-image {
-  width: 50px;
-  height: 50px;
+  width: 60px; 
+  height: 60px;
   object-fit: cover;
   margin-right: 20px;
 }
@@ -45,24 +44,25 @@
 }
 
 .card-title {
-  font-size: 18px;
+  font-size: 20px; 
   font-weight: bold;
 }
 
 .card-description {
   color: gray;
+  font-size: 16px; 
 }
 
 .card-actions {
   display: flex;
-  gap: 10px;
+  gap: 15px; 
 }
 
 .card-icon-button {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px; 
   color: gray;
 }
 
